@@ -65,15 +65,14 @@ void GameStart()
 
 int* CreateAiNumber() 
 {
-	int aiNum[3];
+	int *aiNum;
 	int i;
+
+	aiNum = (int*)malloc(3);
 
 	for (i = 0; i < 3; i++) {
 		aiNum[i] = rand() % 10;		// 0~9사이의 숫자 생성
-		printf("%d ", aiNum[i]);
 	}
-
-	printf("\n");
 
 	return aiNum;
 }
@@ -90,14 +89,13 @@ void ProcessModule(char* name, int* aiNum)
 		if (num > 999) {	// 세자리수를 넘어가면 경고
 			printf("------------------------------------\n");
 			printf("[AI] 세자리 숫자로 입력하세요.");
+			printf("------------------------------------\n");
 		}
 
 		// 사용자 입력 숫자를 쪼갬
 		playerNum[0] = num / 100;
 		playerNum[1] = (num % 100) / 10;
 		playerNum[2] = (num % 100) % 10;
-
-		printf("%d %d %d\n", playerNum[0], playerNum[1], playerNum[2]);
 
 		// 스트라이크, 볼 카운트 초기화
 		strikeCount = 0;
