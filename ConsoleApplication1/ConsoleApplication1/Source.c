@@ -11,6 +11,8 @@ int main(void)
 {
 	StartingScreen();
 
+	MenuOption();
+
 	return 0;
 }
 
@@ -25,8 +27,6 @@ void StartingScreen()
 	printf("           2. 게임종료\n");
 	printf("====================================\n");
 	printf("====================================\n");
-
-	MenuOption();
 }
 
 void MenuOption()
@@ -80,7 +80,7 @@ int* CreateAiNumber()
 void ProcessModule(char* name, int* aiNum)
 {
 	int playerNum[3];
-	int num, strikeCount, ballCount;
+	int num, strikeCount, ballCount, roundCount = 0;
 	int i, j;
 
 	while (1) {
@@ -112,10 +112,20 @@ void ProcessModule(char* name, int* aiNum)
 				}
 			}
 		}
+		
+		roundCount++;
 
 		// 결과 출력
-		printf("------------------------------------\n");
+		printf("--------------[%d회]----------------\n", roundCount);
 		printf("[AI] %d 스트라이크 %d 볼입니다.\n", strikeCount, ballCount);
+
+		// 3 스트라이크면 사용자 승리
+		if (strikeCount >= 3) {
+			printf("     축하합니다! 홈런입니다.\n");
+			printf("------------------------------------\n");
+			exit(1);
+		}
+
 		printf("------------------------------------\n");
 	}
 }
